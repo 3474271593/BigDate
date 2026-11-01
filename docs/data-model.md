@@ -1,19 +1,21 @@
 # 数仓模型与指标口径
 
+## 分层设计
+
 | 层级 | 数据对象 | 粒度与职责 |
 |---|---|---|
-| 源库 | shop | 纯结构包含84表901字段，不代表所有表参与实时采集 |
-| ODS | ods_shop_db | table/type/data消息；历史FactBootstrap读取orders/order_goods/order_refunds |
-| DIM | Redis dim:* | DimBootstrap初始化16类维度/关系表 |
-| DWD | dwd_order_info | 订单变更明细，orderId |
-| DWD | dwd_order_goods | 商品明细，ogId及orderId/goodsId |
-| 异常 | dwd_dirty_data | 清洗失败旁路 |
-| DWS | dws_trade_summary | 平台每分钟，orderCount/paidOrderCount/paidAmount |
-| DWS | dws_goods_summary | goodsId+分钟，订单数/件数/金额及支付指标 |
-| DWS | dws_shop_summary | shopId+分钟，订单/支付/窗口内用户数 |
-| DWS | dws_user_summary | userId+分钟，订单/支付/窗口内店铺数 |
+| 业务库 | shop | 业务库表结构与字段定义，详见 sql 目录 |
+| ODS | ods_shop_db | table/type/data 原始事件；历史事实包括 orders、order_goods、order_refunds |
+| DIM | Redis dim:* | 商品、店铺、用户等维度和关系数据 |
+| DWD | dwd_order_info | 按 orderId 组织的订单变更明细 |
+| DWD | dwd_order_goods | 按 ogId 组织的商品明细，关联 orderId/goodsId |
+| 质量旁路 | dwd_dirty_data | 记录清洗失败事件，便于定位数据问题 |
+| DWS | dws_trade_summary | 平台级分钟交易汇总 |
+| DWS | dws_goods_summary | goodsId + 分钟汇总 |
+| DWS | dws_shop_summary | shopId + 分钟汇总 |
+| DWS | dws_user_summary | userId + 分钟汇总 |
 
-DWD生产入口主要处理orders和order_goods；不声称实现全部84表清洗。userId是用户标识，shopId是店铺标识，不把userId视作会员资格。
+## 核心业务关系
 
 ```mermaid
 erDiagram
@@ -24,16 +26,36 @@ erDiagram
   SHOPS ||--o{ GOODS : shopId
 ```
 
-图表示逻辑关联，不表示数据库有外键约束。
+userId 标识订单所属用户，shopId 标识店铺，ogId 标识订单商品明细。图中展示业务逻辑关联。
 
-交易的创建事件基于首次订单，支付事件基于首次已支付或未支付到已支付转换，金额取realTotalMoney。普通订单更新不重复产生支付计数。商品指标为明细口径，不能简单视为平台GMV完整拆分。窗口内用户/店铺去重数跨窗口相加不是全周期独立数量。当前逻辑不等于覆盖任意退款、撤销和金额更正的完整财务账本。
+## 指标定义
 
-窗口为1分钟，Watermark最大乱序5秒。Trade配置迟到侧输出并打印，不能据此声称所有主题都完成迟到补算。
+| 主题 | 指标 | 计算口径 |
+|---|---|---|
+| 交易 | orderCount | 首次订单创建事件计数 |
+| 交易 | paidOrderCount | 首次已支付或未支付到已支付的状态转换计数 |
+| 交易 | paidAmount | 支付事件对应的 realTotalMoney |
+| 商品 | orderGoodsNum / paidGoodsNum | 商品明细下单件数 / 支付件数 |
+| 商品 | orderAmount / paidAmount | 商品明细金额及支付金额 |
+| 店铺 | orderUserCount / paidUserCount | 单分钟窗口内下单 / 支付用户去重数 |
+| 用户 | orderShopCount / paidShopCount | 单分钟窗口内下单 / 支付店铺去重数 |
 
-Trade/Shop/User默认历史边界p0=20015，p1/p2=0；商品明细默认边界30638。它们是原环境快照。边界之前仅预热订单状态，Bootstrap负责历史结果。新数据必须重新采集一致边界并对账，不能盲目沿用或重复初始化。
+商品主题采用明细口径；交易 GMV 采用订单支付金额。用户数与店铺数的去重范围为各自分钟窗口，查询展示按对应粒度解释。
 
-GoodsApp需要goods.runtime.mode=WARMUP或REALTIME，REALTIME需要flink.restore.path恢复预热Checkpoint。新建Job不等于恢复旧状态。
+## 事件时间与窗口
 
-API限定historical=2019年、test=2026年；并非动态年份。Druid历史数据采用“上海钟面标为UTC”约定，TimeAdapter保留钟面附加Z；这是兼容逻辑，不是真正UTC转换。Shop/User事件解析依赖JVM默认时区，部署统一Asia/Shanghai。若修正摄取时区，必须联动迁移存量和API。
+下单事件使用 createTime，支付事件使用 payTime。常规计算使用 1 分钟滚动事件时间窗口和 5 秒乱序 Watermark 参数。Trade 通过侧输出记录迟到事件。
 
-API对自然键及指标相同记录去重；同键指标冲突整组排除并返回DATA_CONFLICT。它不修复上游数据，也不等于严格一次写入。
+历史与实时看板按数据集分别查询：historical 对应 2019 年历史数据，test 对应 2026 年模拟增量数据。
+
+系统使用 Asia/Shanghai 业务时间。现有 Druid 数据以业务钟面对应 __time，API 的 TimeAdapter 统一处理查询与返回时间；部署时统一 JVM 时区，并保持摄取与查询的时间约定一致。
+
+## 历史基线与实时衔接
+
+Bootstrap 汇总历史明细；Trade、Shop、User 通过分区结束位点区分历史预热范围与实时增量范围。位点之前建立订单状态，边界后的事件进入实时指标计算。
+
+GoodsApp 分为 WARMUP 与 REALTIME 阶段：WARMUP 建立订单与明细关联状态，REALTIME 从预热 Checkpoint 恢复。位点与快照配置集中在各主题 BootstrapConfig 中。
+
+## 查询质量处理
+
+服务层按主题自然键组织记录。自然键和指标完全相同的记录保留一条；同键存在指标冲突时，通过 DATA_CONFLICT 提示并隔离该组记录，避免直接累加。店铺名称通过 Redis 维表补充，查询结果保持原始指标值。

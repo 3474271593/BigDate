@@ -1,21 +1,39 @@
-# 本轮验证记录
+# 测试与构建记录
 
-2026-11-01，Asia/Shanghai。对象为发布准备副本。
+验证日期：2026-11-01。
 
-| 检查 | 结果 |
+## 自动化测试
+
+| 模块 | 测试结果 | 覆盖方向 |
+|---|---|---|
+| DWD | 39 项通过 | 订单及明细清洗、序列化、脏数据、维度补全与 Redis 重连、Checkpoint 配置 |
+| DWS | 144 项通过 | 主题增量计算、历史基线、状态预热、商品关联、窗口聚合、迟到数据和序列化 |
+| Flask API | 31 项通过 | 接口参数、时间处理、指标聚合、数据质量与主题分析 |
+| 前端 | 14 项通过 | 图表数据转换、历史图表、请求竞态、3D 店铺图及用户排行逻辑 |
+
+DWS 逻辑测试使用明确的测试类名单；Kafka 分区诊断和手工消息发送工具按集成测试场景执行。命令见 [部署与运行](deployment.md)。
+
+## 构建结果
+
+| 对象 | 结果 |
 |---|---|
-| realtime-dw Maven test/package | 1项通过，BUILD SUCCESS（测试本身是模板断言，主要证明编译打包） |
-| DWD Maven离线test/package | 39项通过，BUILD SUCCESS |
-| DWS Maven离线test/package | 144项通过，BUILD SUCCESS |
-| Flask pytest | 31项通过，1项预装环境依赖弃用提示 |
-| 前端node --test | 14项通过 |
-| pnpm install --frozen-lockfile | 成功 |
-| pnpm run build | 成功，978模块；主JS约1.89MB，gzip约600KB，有包体积提示 |
+| realtime-dw | Maven 编译打包成功 |
+| realtime-flink-kafka-dwd | Maven 编译打包成功 |
+| realtime-flink-kafka-dws | Maven 编译打包成功 |
+| 前端依赖 | pnpm install --frozen-lockfile 成功 |
+| 前端生产构建 | pnpm run build 成功 |
 
-DWS排除连接实际Kafka的KafkaPartitionPositionTest，未执行手工main发消息工具DwsKafkaSinkIntegrationTest。Maven shade存在LICENSE/NOTICE/MANIFEST资源重叠提示，构建通过不等于完成第三方许可证分发审查。
+后端测试命令：
 
-Python来自已有Anaconda3.8.5环境并预装依赖，本次结果不证明requirements能在全新Python3.8安装；Flask>=3需要较新Python，新环境建议Python3.11。
+```powershell
+cd DataScreen/backend
+python -m pytest -p no:cacheprovider tests -q
+```
 
-本轮未连接或修改MySQL/Canal/Kafka/Flink/Redis/Druid，未做在线E2E、压力测试、故障注入或浏览器复验。截图为用户提供的既有成果。
+前端测试与构建：
 
-原Word报告记录2026-09-23消息追踪和2026-10-09Druid查询，并区分原始实测与独立审计/项目方确认。报告里的“生产级容量/恢复力完成”未附本轮可复核压力或故障数据，不能直接当作生产性能承诺。历史179个分钟窗口对账也不是本轮结果。
+```powershell
+cd DataScreen/frontend
+pnpm test
+pnpm run build
+```
