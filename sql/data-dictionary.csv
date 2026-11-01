@@ -1,0 +1,902 @@
+﻿table,field,definition
+accreds,accredId,int(11) NOT NULL AUTO_INCREMENT
+accreds,accredName,varchar(50) NOT NULL
+accreds,accredImg,varchar(150) NOT NULL DEFAULT '0'
+accreds,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+accreds,createTime,datetime NOT NULL
+ad_positions,positionId,int(11) NOT NULL AUTO_INCREMENT
+ad_positions,positionType,tinyint(4) NOT NULL DEFAULT '0'
+ad_positions,positionName,varchar(100) NOT NULL
+ad_positions,positionWidth,int(11) NOT NULL DEFAULT '0'
+ad_positions,positionHeight,int(11) NOT NULL DEFAULT '0'
+ad_positions,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+ad_positions,positionCode,varchar(20) DEFAULT NULL
+ad_positions,apSort,int(11) NOT NULL
+addons,addonId,int(10) NOT NULL AUTO_INCREMENT COMMENT '主键'
+addons,name,varchar(40) NOT NULL COMMENT '插件名或标识'
+addons,title,varchar(20) NOT NULL DEFAULT '' COMMENT '中文名'
+addons,description,text COMMENT '插件描述'
+addons,status,tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态'
+addons,config,text COMMENT '配置'
+addons,author,varchar(40) DEFAULT '' COMMENT '作者'
+addons,version,varchar(20) DEFAULT '' COMMENT '版本号'
+addons,createTime,datetime NOT NULL COMMENT '安装时间'
+addons,dataFlag,tinyint(4) DEFAULT '1'
+addons,isConfig,tinyint(4) DEFAULT '0'
+addons,updateTime,datetime DEFAULT NULL
+ads,adId,int(11) NOT NULL AUTO_INCREMENT
+ads,adPositionId,int(11) NOT NULL DEFAULT '0'
+ads,adFile,varchar(150) NOT NULL
+ads,adName,varchar(100) NOT NULL
+ads,adURL,varchar(255) DEFAULT NULL
+ads,adStartDate,date NOT NULL
+ads,adEndDate,date NOT NULL
+ads,adSort,int(11) NOT NULL DEFAULT '0'
+ads,adClickNum,int(11) NOT NULL DEFAULT '0'
+ads,positionType,tinyint(4) DEFAULT '0'
+ads,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+ads,createTime,datetime NOT NULL
+ads,subTitle,varchar(255) DEFAULT NULL
+areas,areaId,int(11) NOT NULL AUTO_INCREMENT COMMENT '区域ID'
+areas,parentId,int(11) NOT NULL COMMENT '父ID'
+areas,areaName,varchar(100) NOT NULL COMMENT '地区名称'
+areas,isShow,tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否显示	0:是 1:否'
+areas,areaSort,int(11) NOT NULL DEFAULT '0'
+areas,areaKey,char(10) DEFAULT NULL COMMENT '地区首字母'
+areas,areaType,tinyint(4) NOT NULL DEFAULT '1' COMMENT '级别标志1：省，2：市，3：县区'
+areas,dataFlag,tinyint(4) NOT NULL DEFAULT '1' COMMENT '删除标志 -1:删除 1:有效'
+areas,createTime,varchar(25) DEFAULT NULL COMMENT '创建时间'
+article_cats,catId,int(11) NOT NULL AUTO_INCREMENT
+article_cats,parentId,int(11) NOT NULL DEFAULT '0'
+article_cats,catType,tinyint(4) NOT NULL DEFAULT '0'
+article_cats,isShow,tinyint(4) NOT NULL DEFAULT '1'
+article_cats,catName,varchar(20) NOT NULL
+article_cats,catSort,int(11) NOT NULL DEFAULT '0'
+article_cats,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+article_cats,createTime,datetime NOT NULL
+articles,articleId,int(11) NOT NULL AUTO_INCREMENT
+articles,catId,int(11) NOT NULL
+articles,articleTitle,varchar(200) NOT NULL
+articles,isShow,tinyint(4) NOT NULL DEFAULT '1'
+articles,articleContent,longtext
+articles,articleKey,varchar(200) DEFAULT NULL
+articles,staffId,int(11) NOT NULL
+articles,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+articles,createTime,datetime NOT NULL
+articles,solve,int(10) unsigned DEFAULT '0' COMMENT '解决数'
+articles,unsolve,int(10) unsigned DEFAULT '0' COMMENT '未解决数'
+articles,coverImg,varchar(150) DEFAULT NULL
+articles,visitorNum,int(10) unsigned DEFAULT '0' COMMENT '文章浏览量'
+articles,TypeStatus,int(10) DEFAULT '1'
+articles,likeNum,int(50) DEFAULT '0'
+articles,catSort,int(11) DEFAULT '0'
+articles,articleDesc,varchar(500) DEFAULT NULL COMMENT '文章描述'
+attributes,attrId,int(11) NOT NULL AUTO_INCREMENT
+attributes,goodsCatId,int(11) NOT NULL DEFAULT '0'
+attributes,goodsCatPath,varchar(100) NOT NULL
+attributes,attrName,varchar(100) NOT NULL
+attributes,attrType,tinyint(4) NOT NULL DEFAULT '0'
+attributes,attrVal,text
+attributes,attrSort,int(11) NOT NULL DEFAULT '0'
+attributes,isShow,tinyint(4) DEFAULT '1'
+attributes,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+attributes,createTime,datetime NOT NULL
+banks,bankId,int(11) NOT NULL AUTO_INCREMENT
+banks,bankName,varchar(50) NOT NULL
+banks,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+banks,createTime,datetime NOT NULL
+brands,brandId,int(11) NOT NULL AUTO_INCREMENT
+brands,brandName,varchar(100) NOT NULL
+brands,brandImg,varchar(150) NOT NULL
+brands,brandDesc,text
+brands,createTime,datetime NOT NULL
+brands,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+brands,sortNo,int(11) DEFAULT '0'
+carts,cartId,int(11) NOT NULL AUTO_INCREMENT
+carts,userId,int(11) NOT NULL DEFAULT '0'
+carts,isCheck,tinyint(4) NOT NULL DEFAULT '1'
+carts,goodsId,int(11) NOT NULL DEFAULT '0'
+carts,goodsSpecId,varchar(200) NOT NULL DEFAULT '0'
+carts,cartNum,int(11) NOT NULL DEFAULT '0'
+cash_configs,id,int(11) NOT NULL AUTO_INCREMENT
+cash_configs,targetType,tinyint(4) NOT NULL DEFAULT '0'
+cash_configs,targetId,int(11) NOT NULL
+cash_configs,accType,tinyint(4) NOT NULL DEFAULT '0'
+cash_configs,accTargetId,int(11) NOT NULL DEFAULT '0'
+cash_configs,accAreaId,int(11) DEFAULT NULL
+cash_configs,accNo,varchar(100) NOT NULL
+cash_configs,accUser,varchar(100) NOT NULL
+cash_configs,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+cash_configs,createTime,datetime NOT NULL
+cash_draws,cashId,int(11) NOT NULL AUTO_INCREMENT
+cash_draws,cashNo,varchar(50) NOT NULL
+cash_draws,targetType,tinyint(4) NOT NULL DEFAULT '0'
+cash_draws,targetId,int(11) NOT NULL DEFAULT '0'
+cash_draws,money,"decimal(11,2) NOT NULL DEFAULT '0.00'"
+cash_draws,accType,tinyint(4) NOT NULL DEFAULT '0'
+cash_draws,accTargetName,varchar(100) DEFAULT NULL
+cash_draws,accAreaName,varchar(100) DEFAULT NULL
+cash_draws,accNo,varchar(100) NOT NULL
+cash_draws,accUser,varchar(100) DEFAULT NULL
+cash_draws,cashSatus,tinyint(4) NOT NULL DEFAULT '0'
+cash_draws,cashRemarks,varchar(255) DEFAULT NULL
+cash_draws,cashConfigId,int(11) NOT NULL
+cash_draws,createTime,datetime NOT NULL
+cat_brands,id,int(11) NOT NULL AUTO_INCREMENT
+cat_brands,catId,int(11) DEFAULT NULL
+cat_brands,brandId,int(11) DEFAULT NULL
+cat_shops,id,int(11) NOT NULL AUTO_INCREMENT
+cat_shops,shopId,int(11) NOT NULL DEFAULT '0'
+cat_shops,catId,int(11) NOT NULL DEFAULT '0'
+charge_items,id,int(11) NOT NULL AUTO_INCREMENT
+charge_items,chargeMoney,int(11) DEFAULT '0'
+charge_items,giveMoney,"decimal(11,1) DEFAULT '0.0'"
+charge_items,itemSort,int(11) DEFAULT '0'
+charge_items,dataFlag,tinyint(4) DEFAULT '1'
+charge_items,createTime,datetime DEFAULT NULL
+crons,id,int(11) NOT NULL AUTO_INCREMENT
+crons,cronName,varchar(100) NOT NULL
+crons,cronCode,varchar(20) NOT NULL
+crons,isEnable,tinyint(4) NOT NULL DEFAULT '0'
+crons,isRunning,tinyint(4) NOT NULL DEFAULT '0'
+crons,cronJson,text
+crons,cronUrl,varchar(255) NOT NULL
+crons,cronDesc,varchar(255) DEFAULT NULL
+crons,cronCycle,tinyint(4) NOT NULL DEFAULT '0'
+crons,cronDay,tinyint(4) DEFAULT '1'
+crons,cronWeek,tinyint(4) DEFAULT '0'
+crons,cronHour,tinyint(4) DEFAULT NULL
+crons,cronMinute,varchar(255) DEFAULT NULL
+crons,runTime,varchar(20) DEFAULT NULL
+crons,nextTime,varchar(20) DEFAULT NULL
+crons,isRunSuccess,tinyint(4) NOT NULL DEFAULT '1'
+crons,author,varchar(255) DEFAULT NULL
+crons,authorUrl,varchar(255) DEFAULT NULL
+data_cats,catId,int(11) NOT NULL AUTO_INCREMENT
+data_cats,catName,varchar(255) NOT NULL
+data_cats,dataFlag,tinyint(4) DEFAULT '1' COMMENT '数据有效标志1:有效 -1:无效'
+data_cats,catCode,varchar(255) NOT NULL COMMENT '数据分类代码'
+datas,id,int(11) NOT NULL AUTO_INCREMENT
+datas,catId,int(11) NOT NULL DEFAULT '0'
+datas,dataName,varchar(255) NOT NULL
+datas,dataVal,varchar(255) NOT NULL
+datas,dataSort,int(11) NOT NULL DEFAULT '0'
+datas,dataFlag,tinyint(4) DEFAULT '1' COMMENT '数据有效标志1:有效 -1:无效'
+express,expressId,int(11) NOT NULL AUTO_INCREMENT
+express,expressName,varchar(50) NOT NULL
+express,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+express,expressCode,varchar(50) DEFAULT ''
+favorites,favoriteId,int(11) NOT NULL AUTO_INCREMENT
+favorites,userId,int(11) NOT NULL DEFAULT '0'
+favorites,favoriteType,tinyint(4) NOT NULL DEFAULT '0'
+favorites,targetId,int(11) NOT NULL
+favorites,createTime,datetime NOT NULL
+friendlinks,friendlinkId,int(11) NOT NULL AUTO_INCREMENT
+friendlinks,friendlinkIco,varchar(150) DEFAULT ''
+friendlinks,friendlinkName,varchar(50) NOT NULL DEFAULT ''
+friendlinks,friendlinkUrl,varchar(150) NOT NULL DEFAULT ''
+friendlinks,friendlinkSort,int(11) NOT NULL DEFAULT '0'
+friendlinks,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+friendlinks,createTime,datetime NOT NULL
+goods,goodsId,bigint(11) NOT NULL AUTO_INCREMENT COMMENT '商品id'
+goods,goodsSn,varchar(20) NOT NULL COMMENT '商品编号'
+goods,productNo,varchar(20) NOT NULL COMMENT '商品货号'
+goods,goodsName,varchar(200) NOT NULL COMMENT '商品名称'
+goods,goodsImg,varchar(150) NOT NULL COMMENT '商品图片'
+goods,shopId,bigint(11) NOT NULL COMMENT '门店ID'
+goods,goodsType,tinyint(4) NOT NULL DEFAULT '0' COMMENT '货物类型'
+goods,marketPrice,"decimal(11,2) NOT NULL DEFAULT '0.00' COMMENT '市场价'"
+goods,shopPrice,"decimal(11,2) NOT NULL DEFAULT '0.00' COMMENT '门店价'"
+goods,warnStock,bigint(11) NOT NULL DEFAULT '0' COMMENT '预警库存'
+goods,goodsStock,bigint(11) NOT NULL DEFAULT '0' COMMENT '商品总库存'
+goods,goodsUnit,char(10) NOT NULL COMMENT '单位'
+goods,goodsTips,text COMMENT '促销信息'
+goods,isSale,tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否上架	0:不上架 1:上架'
+goods,isBest,tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否精品	0:否 1:是'
+goods,isHot,tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否热销产品	0:否 1:是'
+goods,isNew,tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否新品	0:否 1:是'
+goods,isRecom,tinyint(4) DEFAULT '0' COMMENT '是否推荐	0:否 1:是'
+goods,goodsCatIdPath,varchar(255) DEFAULT NULL COMMENT '商品分类ID路径	catId1_catId2_catId3'
+goods,goodsCatId,int(11) NOT NULL COMMENT 'goodsCatId	最后一级商品分类ID'
+goods,shopCatId1,int(11) NOT NULL COMMENT '门店商品分类第一级ID'
+goods,shopCatId2,int(11) NOT NULL COMMENT '门店商品第二级分类ID'
+goods,brandId,int(11) DEFAULT '0' COMMENT '品牌ID'
+goods,goodsDesc,text NOT NULL COMMENT '商品描述'
+goods,goodsStatus,tinyint(4) NOT NULL DEFAULT '0' COMMENT '商品状态	-1:违规 0:未审核 1:已审核'
+goods,saleNum,int(11) NOT NULL DEFAULT '0' COMMENT '总销售量'
+goods,saleTime,varchar(25) NOT NULL COMMENT '上架时间'
+goods,visitNum,int(11) DEFAULT '0' COMMENT '访问数'
+goods,appraiseNum,int(11) DEFAULT '0' COMMENT '评价书'
+goods,isSpec,tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否有规格	0:没有 1:有'
+goods,gallery,text COMMENT '商品相册'
+goods,goodsSeoKeywords,varchar(200) DEFAULT NULL COMMENT '商品SEO关键字'
+goods,illegalRemarks,varchar(255) DEFAULT NULL COMMENT '状态说明	一般用于说明拒绝原因'
+goods,dataFlag,tinyint(4) NOT NULL DEFAULT '1' COMMENT '	删除标志	-1:删除 1:有效'
+goods,createTime,varchar(25) NOT NULL
+goods,isFreeShipping,tinyint(4) DEFAULT '0'
+goods,goodsSerachKeywords,text
+goods_appraises,id,bigint(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID'
+goods_appraises,shopId,bigint(11) NOT NULL DEFAULT '0' COMMENT '门店id'
+goods_appraises,orderId,bigint(11) NOT NULL DEFAULT '0' COMMENT '订单ID'
+goods_appraises,goodsId,bigint(11) NOT NULL DEFAULT '0' COMMENT '评价对象-商品id'
+goods_appraises,goodsSpecId,int(11) NOT NULL DEFAULT '0' COMMENT '商品规格id'
+goods_appraises,userId,bigint(11) NOT NULL DEFAULT '0' COMMENT '用户id'
+goods_appraises,goodsScore,int(11) NOT NULL DEFAULT '0' COMMENT '商品评分'
+goods_appraises,serviceScore,int(11) NOT NULL DEFAULT '0' COMMENT '服务评分'
+goods_appraises,timeScore,int(11) NOT NULL DEFAULT '0' COMMENT '时效评分'
+goods_appraises,content,text NOT NULL COMMENT '评价内容'
+goods_appraises,shopReply,text COMMENT '店铺回复'
+goods_appraises,images,text COMMENT '上传图片'
+goods_appraises,isShow,tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否显示 0：不显示，1：显示'
+goods_appraises,dataFlag,tinyint(4) NOT NULL DEFAULT '1' COMMENT '有效状态'
+goods_appraises,createTime,varchar(25) NOT NULL COMMENT '创建时间'
+goods_appraises,replyTime,varchar(25) DEFAULT NULL COMMENT '回复时间'
+goods_attributes,id,int(11) NOT NULL AUTO_INCREMENT
+goods_attributes,shopId,int(11) NOT NULL
+goods_attributes,goodsId,int(11) NOT NULL
+goods_attributes,attrId,int(11) NOT NULL
+goods_attributes,attrVal,text NOT NULL
+goods_attributes,createTime,datetime NOT NULL
+goods_cats,catId,int(11) NOT NULL AUTO_INCREMENT COMMENT '品类ID'
+goods_cats,parentId,int(11) NOT NULL COMMENT '父ID'
+goods_cats,catName,varchar(20) NOT NULL COMMENT '分类名称'
+goods_cats,isShow,tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否显示	0:隐藏 1:显示'
+goods_cats,isFloor,tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否显示楼层	0:不显示 1:显示'
+goods_cats,catSort,int(11) NOT NULL DEFAULT '0' COMMENT '排序号'
+goods_cats,dataFlag,tinyint(4) NOT NULL DEFAULT '1' COMMENT '删除标志	1:有效 -1：删除'
+goods_cats,createTime,varchar(25) NOT NULL COMMENT '建立时间'
+goods_cats,commissionRate,"decimal(11,2) DEFAULT '-1.00' COMMENT '商品佣金比例	-1代表使用上级父类的佣金设置'"
+goods_cats,catImg,varchar(150) DEFAULT NULL
+goods_cats,subTitle,varchar(150) DEFAULT '' COMMENT '楼层副标题'
+goods_cats,simpleName,varchar(20) NOT NULL COMMENT '简写名称'
+goods_cats,seoTitle,varchar(200) NOT NULL COMMENT '分类SEO标题'
+goods_cats,seoKeywords,varchar(200) NOT NULL COMMENT '分类SEO关键字'
+goods_cats,seoDes,varchar(200) NOT NULL COMMENT '分类SEO描述'
+goods_cats,catListTheme,varchar(200) NOT NULL DEFAULT 'goods_list' COMMENT '商品分类列表风格'
+goods_cats,detailTheme,varchar(200) NOT NULL DEFAULT 'goods_detail' COMMENT '商品详情风格'
+goods_cats,mobileCatListTheme,varchar(200) NOT NULL DEFAULT 'goods_list' COMMENT '移动端商品分类列表风格'
+goods_cats,mobileDetailTheme,varchar(200) NOT NULL DEFAULT 'goods_detail' COMMENT '移动端商品详情风格'
+goods_cats,wechatCatListTheme,varchar(200) NOT NULL DEFAULT 'goods_list' COMMENT '微信端商品分类列表风格'
+goods_cats,wechatDetailTheme,varchar(200) NOT NULL DEFAULT 'goods_detail' COMMENT '微信端商品详情风格'
+goods_cats,cat_level,tinyint(4) DEFAULT '0' COMMENT '分类级别，共3级'
+goods_consult,id,int(10) unsigned NOT NULL AUTO_INCREMENT
+goods_consult,goodsId,int(10) unsigned NOT NULL COMMENT '商品id'
+goods_consult,userId,int(10) unsigned DEFAULT NULL COMMENT '用户id'
+goods_consult,consultType,tinyint(3) unsigned DEFAULT NULL COMMENT '咨询类别'
+goods_consult,consultContent,varchar(500) DEFAULT NULL COMMENT '咨询内容'
+goods_consult,createTime,timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '咨询时间'
+goods_consult,reply,varchar(255) NOT NULL DEFAULT '' COMMENT '商家回复'
+goods_consult,replyTime,datetime DEFAULT NULL COMMENT '回复时间'
+goods_consult,dataFlag,tinyint(4) DEFAULT '1' COMMENT '数据有效标志'
+goods_consult,isShow,tinyint(4) DEFAULT '1' COMMENT '是否显示数据'
+goods_scores,scoreId,int(11) NOT NULL AUTO_INCREMENT
+goods_scores,goodsId,int(11) NOT NULL DEFAULT '0'
+goods_scores,shopId,int(11) NOT NULL DEFAULT '0'
+goods_scores,totalScore,int(11) NOT NULL DEFAULT '0'
+goods_scores,totalUsers,int(11) NOT NULL DEFAULT '0'
+goods_scores,goodsScore,int(11) NOT NULL DEFAULT '0'
+goods_scores,goodsUsers,int(11) NOT NULL DEFAULT '0'
+goods_scores,serviceScore,int(11) NOT NULL DEFAULT '0'
+goods_scores,serviceUsers,int(11) NOT NULL DEFAULT '0'
+goods_scores,timeScore,int(11) NOT NULL DEFAULT '0'
+goods_scores,timeUsers,int(11) NOT NULL DEFAULT '0'
+goods_specs,id,int(11) NOT NULL AUTO_INCREMENT
+goods_specs,shopId,int(11) NOT NULL DEFAULT '0'
+goods_specs,goodsId,int(11) NOT NULL DEFAULT '0'
+goods_specs,productNo,varchar(20) NOT NULL
+goods_specs,specIds,varchar(255) NOT NULL
+goods_specs,marketPrice,"decimal(11,2) NOT NULL DEFAULT '0.00'"
+goods_specs,specPrice,"decimal(11,2) NOT NULL DEFAULT '0.00'"
+goods_specs,specStock,int(11) NOT NULL DEFAULT '0'
+goods_specs,warnStock,int(11) NOT NULL DEFAULT '0'
+goods_specs,saleNum,int(11) NOT NULL DEFAULT '0'
+goods_specs,isDefault,tinyint(4) DEFAULT '0'
+goods_specs,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+goods_virtuals,id,int(11) NOT NULL AUTO_INCREMENT
+goods_virtuals,shopId,int(11) NOT NULL
+goods_virtuals,goodsId,int(11) NOT NULL
+goods_virtuals,cardNo,varchar(20) NOT NULL
+goods_virtuals,cardPwd,varchar(20) NOT NULL
+goods_virtuals,orderId,int(11) NOT NULL DEFAULT '0'
+goods_virtuals,orderNo,varchar(20) DEFAULT NULL
+goods_virtuals,isUse,tinyint(4) NOT NULL DEFAULT '0'
+goods_virtuals,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+goods_virtuals,createTime,datetime NOT NULL
+home_menus,menuId,int(11) NOT NULL AUTO_INCREMENT
+home_menus,parentId,int(11) NOT NULL DEFAULT '0'
+home_menus,menuName,varchar(100) NOT NULL
+home_menus,menuUrl,varchar(100) NOT NULL
+home_menus,menuOtherUrl,text
+home_menus,menuType,tinyint(4) NOT NULL DEFAULT '0'
+home_menus,isShow,tinyint(4) DEFAULT '1'
+home_menus,menuSort,int(11) NOT NULL DEFAULT '0'
+home_menus,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+home_menus,createTime,datetime DEFAULT NULL
+home_menus,menuMark,varchar(50) DEFAULT NULL
+hooks,hookId,int(10) NOT NULL AUTO_INCREMENT COMMENT '主键'
+hooks,name,varchar(40) NOT NULL DEFAULT '' COMMENT '钩子名称'
+hooks,hookRemarks,text NOT NULL COMMENT '描述'
+hooks,hookType,tinyint(1) NOT NULL DEFAULT '1' COMMENT '类型'
+hooks,updateTime,datetime NOT NULL COMMENT '更新时间'
+hooks,addons,text
+images,imgId,int(11) NOT NULL AUTO_INCREMENT
+images,fromType,tinyint(4) NOT NULL DEFAULT '0'
+images,dataId,int(11) NOT NULL DEFAULT '0'
+images,imgPath,varchar(150) NOT NULL
+images,imgSize,int(11) NOT NULL DEFAULT '0'
+images,isUse,tinyint(4) NOT NULL DEFAULT '1'
+images,createTime,datetime NOT NULL
+images,fromTable,varchar(50) DEFAULT NULL
+images,ownId,int(11) DEFAULT NULL
+images,dataFlag,tinyint(4) DEFAULT '1'
+informs,informId,int(11) NOT NULL AUTO_INCREMENT
+informs,informTargetId,int(11) NOT NULL
+informs,goodId,int(11) NOT NULL
+informs,shopId,int(11) NOT NULL
+informs,informType,int(11) NOT NULL DEFAULT '1'
+informs,informContent,text
+informs,informAnnex,text NOT NULL
+informs,informTime,datetime NOT NULL
+informs,informStatus,tinyint(4) NOT NULL
+informs,respondContent,text
+informs,finalHandleStaffId,int(11) DEFAULT NULL
+informs,finalHandleTime,datetime DEFAULT NULL
+informs,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+invoices,id,int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键'
+invoices,invoiceHead,varchar(255) NOT NULL COMMENT '发票抬头'
+invoices,invoiceCode,varchar(255) NOT NULL DEFAULT '' COMMENT '纳税人识别号'
+invoices,userId,int(10) unsigned NOT NULL COMMENT '用户id'
+invoices,dataFlag,tinyint(4) NOT NULL DEFAULT '1' COMMENT '数据有效标记'
+invoices,createTime,datetime NOT NULL COMMENT '数据创建时间'
+log_moneys,id,int(11) NOT NULL AUTO_INCREMENT
+log_moneys,targetType,tinyint(4) NOT NULL DEFAULT '0'
+log_moneys,targetId,int(11) NOT NULL DEFAULT '0'
+log_moneys,dataId,int(11) NOT NULL DEFAULT '0'
+log_moneys,dataSrc,varchar(20) DEFAULT NULL
+log_moneys,remark,text NOT NULL
+log_moneys,moneyType,tinyint(4) NOT NULL DEFAULT '1'
+log_moneys,money,"decimal(11,2) NOT NULL DEFAULT '0.00'"
+log_moneys,tradeNo,varchar(100) DEFAULT NULL
+log_moneys,payType,varchar(20) DEFAULT NULL
+log_moneys,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+log_moneys,createTime,datetime NOT NULL
+log_operates,operateId,int(11) NOT NULL AUTO_INCREMENT
+log_operates,staffId,int(11) NOT NULL DEFAULT '0'
+log_operates,operateTime,datetime NOT NULL
+log_operates,menuId,int(11) NOT NULL
+log_operates,operateDesc,varchar(255) NOT NULL
+log_operates,operateUrl,varchar(255) NOT NULL
+log_operates,content,longtext
+log_operates,operateIP,varchar(20) DEFAULT NULL
+log_orders,logId,int(11) NOT NULL AUTO_INCREMENT
+log_orders,orderId,int(11) NOT NULL DEFAULT '0'
+log_orders,orderStatus,int(11) NOT NULL
+log_orders,logContent,varchar(255) NOT NULL
+log_orders,logUserId,int(11) NOT NULL DEFAULT '0'
+log_orders,logType,tinyint(4) NOT NULL DEFAULT '0'
+log_orders,logTime,datetime NOT NULL
+log_pay_params,logId,int(11) NOT NULL AUTO_INCREMENT
+log_pay_params,userId,int(11) DEFAULT NULL COMMENT '0'
+log_pay_params,transId,varchar(50) DEFAULT NULL
+log_pay_params,paramsVa,varchar(500) DEFAULT NULL
+log_pay_params,payFrom,varchar(20) DEFAULT NULL
+log_pay_params,createTime,datetime DEFAULT NULL
+log_pays,logId,int(11) NOT NULL AUTO_INCREMENT
+log_pays,userId,int(11) DEFAULT NULL COMMENT '0'
+log_pays,transId,varchar(50) DEFAULT NULL
+log_pays,createTime,datetime DEFAULT NULL
+log_sms,smsId,int(11) NOT NULL AUTO_INCREMENT
+log_sms,smsSrc,tinyint(4) NOT NULL DEFAULT '0'
+log_sms,smsUserId,int(11) NOT NULL DEFAULT '0'
+log_sms,smsContent,varchar(255) NOT NULL
+log_sms,smsPhoneNumber,varchar(11) NOT NULL
+log_sms,smsReturnCode,varchar(255) NOT NULL
+log_sms,smsCode,varchar(255) DEFAULT NULL
+log_sms,smsFunc,varchar(50) NOT NULL
+log_sms,smsIP,varchar(16) NOT NULL
+log_sms,createTime,datetime NOT NULL
+log_staff_logins,loginId,int(11) NOT NULL AUTO_INCREMENT
+log_staff_logins,staffId,int(11) NOT NULL DEFAULT '0'
+log_staff_logins,loginTime,datetime NOT NULL
+log_staff_logins,loginIp,varchar(16) NOT NULL
+log_user_logins,loginId,int(11) NOT NULL AUTO_INCREMENT
+log_user_logins,userId,int(11) NOT NULL
+log_user_logins,loginTime,datetime NOT NULL
+log_user_logins,loginIp,varchar(16) NOT NULL
+log_user_logins,loginSrc,tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '0:商城  1:webapp  2:App'
+log_user_logins,loginRemark,varchar(30) DEFAULT NULL COMMENT '登录备注信息'
+logs,id,varchar(100) NOT NULL COMMENT '唯一标识'
+logs,url,varchar(200) DEFAULT NULL COMMENT '当前链接地址'
+logs,referer,varchar(200) DEFAULT NULL COMMENT '前一页链接地址'
+logs,keyword,varchar(50) DEFAULT NULL COMMENT '搜索引擎关键字'
+logs,type,varchar(10) DEFAULT NULL COMMENT '访问类型'
+logs,guid,varchar(50) DEFAULT NULL COMMENT '唯一用户ID'
+logs,page_id,"varchar(200) DEFAULT NULL COMMENT 'tracker自动化打点的pageType + ""."" + pageId +"".0.0.0.""+uniId(已废弃)'"
+logs,module_id,varchar(200) DEFAULT NULL COMMENT 'tracker自动化打点的tracker position（tp）(可废弃)'
+logs,link_id,varchar(200) DEFAULT NULL COMMENT 'tracker自动化打点的tracker content（tc）(可废弃)'
+logs,attached_info,varchar(50) DEFAULT NULL COMMENT '附加信息，记录了库存信息等'
+logs,session_id,varchar(50) DEFAULT NULL COMMENT '对应cookie.tracker_msessionid'
+logs,tracker_u,varchar(50) DEFAULT NULL COMMENT '网盟用户id'
+logs,tracker_type,varchar(200) DEFAULT NULL COMMENT '跟踪类型'
+logs,ip,varchar(200) DEFAULT NULL COMMENT '用户ip'
+logs,tracker_src,varchar(200) DEFAULT NULL COMMENT '页面来源'
+logs,cookie,varchar(200) DEFAULT NULL COMMENT '传入的cookie参数'
+logs,order_code,varchar(50) DEFAULT NULL COMMENT '订单编号'
+logs,track_time,varchar(50) DEFAULT NULL COMMENT '跟踪时间'
+logs,end_user_id,varchar(50) DEFAULT NULL COMMENT '客户ID'
+logs,first_link,varchar(200) DEFAULT NULL COMMENT '首次访问的链接'
+logs,session_view_no,varchar(50) DEFAULT NULL COMMENT '客户访问网站的顺序'
+logs,product_id,varchar(50) DEFAULT NULL COMMENT '产品ID'
+logs,cur_merchant_id,varchar(50) DEFAULT NULL COMMENT '用户当前选择的merchantId（已废弃）'
+logs,province_id,varchar(10) DEFAULT NULL COMMENT '省份ID'
+logs,city_id,varchar(10) DEFAULT NULL COMMENT '城市ID'
+logs,fee,varchar(10) DEFAULT NULL COMMENT '判断搜索引擎关键字是否收费'
+logs,edm_activity,"varchar(10) DEFAULT NULL COMMENT 'EDM邮件是否被打开,Y为打开'"
+logs,edm_email,varchar(50) DEFAULT NULL COMMENT 'EDM邮件地址或者邮件ID'
+logs,edm_job_id,varchar(50) DEFAULT NULL COMMENT '发送该邮件地址的edm jod id'
+logs,ie_version,varchar(255) DEFAULT NULL COMMENT '浏览器版本'
+logs,platform,varchar(50) DEFAULT NULL COMMENT '操作系统'
+logs,internal_keyword,varchar(50) DEFAULT NULL COMMENT '站内搜索关键字'
+logs,result_sum,varchar(50) DEFAULT NULL COMMENT '搜索结果数'
+logs,current_page,varchar(50) DEFAULT NULL COMMENT '搜索当前页'
+logs,link_position,varchar(50) DEFAULT NULL COMMENT '链接位置'
+logs,button_position,varchar(50) DEFAULT NULL COMMENT '按钮位置'
+menus,menuId,int(11) NOT NULL AUTO_INCREMENT
+menus,parentId,int(11) NOT NULL
+menus,menuName,varchar(100) NOT NULL
+menus,menuSort,int(11) NOT NULL DEFAULT '0'
+menus,dataFlag,tinyint(4) NOT NULL DEFAULT '0'
+menus,menuMark,varchar(50) DEFAULT NULL
+menus,isShow,tinyint(4) DEFAULT '1'
+menus,menuIcon,varchar(50) DEFAULT NULL
+message_queues,id,int(11) NOT NULL AUTO_INCREMENT
+message_queues,userId,int(11) DEFAULT NULL
+message_queues,msgType,tinyint(4) DEFAULT '0'
+message_queues,paramJson,text
+message_queues,msgJson,text
+message_queues,createTime,datetime DEFAULT NULL
+message_queues,sendTime,datetime DEFAULT NULL
+message_queues,sendStatus,tinyint(4) DEFAULT '0'
+message_queues,msgCode,varchar(100) DEFAULT NULL
+messages,id,int(11) NOT NULL AUTO_INCREMENT
+messages,msgType,tinyint(4) NOT NULL DEFAULT '0'
+messages,sendUserId,int(11) NOT NULL DEFAULT '0'
+messages,receiveUserId,int(11) NOT NULL DEFAULT '0'
+messages,msgContent,text NOT NULL
+messages,msgStatus,tinyint(4) NOT NULL DEFAULT '0'
+messages,msgJson,varchar(255) DEFAULT NULL
+messages,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+messages,createTime,datetime NOT NULL
+mobile_btns,id,int(11) NOT NULL AUTO_INCREMENT
+mobile_btns,btnName,varchar(255) DEFAULT NULL
+mobile_btns,btnSrc,tinyint(4) NOT NULL DEFAULT '0'
+mobile_btns,btnUrl,varchar(255) DEFAULT NULL
+mobile_btns,btnImg,varchar(255) DEFAULT NULL
+mobile_btns,addonsName,varchar(255) DEFAULT NULL
+mobile_btns,btnSort,int(11) DEFAULT '0'
+navs,id,int(11) NOT NULL AUTO_INCREMENT
+navs,navType,tinyint(4) NOT NULL DEFAULT '0'
+navs,navTitle,varchar(50) NOT NULL
+navs,navUrl,varchar(100) NOT NULL
+navs,isShow,tinyint(4) NOT NULL DEFAULT '1'
+navs,isOpen,tinyint(4) NOT NULL DEFAULT '0'
+navs,navSort,int(11) NOT NULL DEFAULT '0'
+navs,createTime,datetime NOT NULL
+order_complains,complainId,int(11) NOT NULL AUTO_INCREMENT
+order_complains,orderId,int(11) NOT NULL DEFAULT '0'
+order_complains,complainType,tinyint(4) NOT NULL DEFAULT '1'
+order_complains,complainTargetId,int(11) NOT NULL DEFAULT '0'
+order_complains,respondTargetId,int(11) NOT NULL DEFAULT '0'
+order_complains,needRespond,tinyint(4) NOT NULL DEFAULT '0'
+order_complains,deliverRespondTime,datetime DEFAULT NULL
+order_complains,complainContent,text NOT NULL
+order_complains,complainAnnex,varchar(255) DEFAULT NULL
+order_complains,complainStatus,tinyint(4) NOT NULL DEFAULT '0'
+order_complains,complainTime,datetime NOT NULL
+order_complains,respondContent,text
+order_complains,respondAnnex,varchar(255) DEFAULT NULL
+order_complains,respondTime,datetime DEFAULT NULL
+order_complains,finalResult,text
+order_complains,finalResultTime,datetime DEFAULT NULL
+order_complains,finalHandleStaffId,int(11) DEFAULT '0'
+order_express,id,int(11) NOT NULL AUTO_INCREMENT
+order_express,orderId,int(11) NOT NULL
+order_express,orderGoodsId,varchar(100) NOT NULL
+order_express,deliveryTime,datetime DEFAULT NULL
+order_express,isExpress,tinyint(4) DEFAULT '0' COMMENT '1:��Ҫ����  0:��������'
+order_express,expressId,int(11) DEFAULT NULL
+order_express,expressNo,varchar(20) DEFAULT NULL
+order_express,createTime,datetime NOT NULL
+order_express,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+order_goods,ogId,bigint(11) NOT NULL AUTO_INCREMENT
+order_goods,orderId,bigint(11) NOT NULL COMMENT '订单id'
+order_goods,goodsId,bigint(11) NOT NULL COMMENT '商品id'
+order_goods,goodsNum,bigint(11) NOT NULL DEFAULT '0' COMMENT '商品数量'
+order_goods,goodsPrice,"decimal(11,2) NOT NULL DEFAULT '0.00' COMMENT '商品价格'"
+order_goods,goodsSpecId,int(11) DEFAULT '0' COMMENT '商品规格id'
+order_goods,goodsSpecNames,varchar(500) DEFAULT NULL COMMENT '商品规格列表'
+order_goods,goodsName,varchar(200) NOT NULL COMMENT '商品名称'
+order_goods,goodsImg,varchar(150) NOT NULL COMMENT '商品图片'
+order_goods,extraJson,text COMMENT '额外信息'
+order_goods,goodsType,tinyint(4) NOT NULL DEFAULT '0'
+order_goods,commissionRate,"decimal(11,2) DEFAULT '0.00' COMMENT '商品佣金比率'"
+order_goods,goodsCode,varchar(20) DEFAULT NULL
+order_goods,promotionJson,text
+order_refunds,id,int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID'
+order_refunds,orderId,int(11) NOT NULL COMMENT '订单id'
+order_refunds,goodsId,int(11) NOT NULL COMMENT '商品id'
+order_refunds,refundTo,int(11) NOT NULL DEFAULT '0' COMMENT '接收退款用户'
+order_refunds,refundReson,int(11) NOT NULL DEFAULT '0' COMMENT '用户申请退款原因ID'
+order_refunds,refundOtherReson,varchar(255) DEFAULT NULL COMMENT '用户申请退款原因'
+order_refunds,backMoney,"decimal(11,2) NOT NULL DEFAULT '0.00' COMMENT '退款金额'"
+order_refunds,refundTradeNo,varchar(100) DEFAULT NULL COMMENT '退款流水号'
+order_refunds,refundRemark,varchar(500) DEFAULT NULL COMMENT '退款备注'
+order_refunds,refundTime,varchar(25) DEFAULT NULL COMMENT '退款时间'
+order_refunds,shopRejectReason,varchar(255) DEFAULT NULL COMMENT '店铺不同意退款原因'
+order_refunds,refundStatus,tinyint(4) NOT NULL DEFAULT '0' COMMENT '退款状态'
+order_refunds,createTime,varchar(25) NOT NULL COMMENT '用户申请退款时间'
+orderids,id,bigint(11) NOT NULL AUTO_INCREMENT
+orderids,rnd,"float(16,2) NOT NULL"
+orders,orderId,bigint(11) NOT NULL AUTO_INCREMENT COMMENT '订单id'
+orders,orderNo,varchar(20) NOT NULL COMMENT '订单编号'
+orders,shopId,bigint(11) NOT NULL COMMENT '门店id'
+orders,userId,bigint(11) NOT NULL COMMENT '用户id'
+orders,orderStatus,tinyint(4) NOT NULL DEFAULT '-2' COMMENT '订单状态 -3:用户拒收 -2:未付款的订单 -1：用户取消 0:待发货 1:配送中 2:用户确认收货'
+orders,goodsMoney,"decimal(11,2) NOT NULL COMMENT '商品金额'"
+orders,deliverType,tinyint(4) NOT NULL DEFAULT '0' COMMENT '收货方式 	0:送货上门 1:自提'
+orders,deliverMoney,"decimal(11,2) NOT NULL DEFAULT '0.00' COMMENT '运费'"
+orders,totalMoney,"decimal(11,2) NOT NULL COMMENT '订单金额（包括运费）'"
+orders,realTotalMoney,"decimal(11,2) NOT NULL DEFAULT '0.00' COMMENT '实际订单金额（折扣后金额）'"
+orders,payType,"tinyint(4) NOT NULL DEFAULT '0' COMMENT '支付方式,0:未知;1:支付宝，2：微信;3、现金；4、其他'"
+orders,isPay,tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否支付	0:未支付 1:已支付'
+orders,areaId,int(11) NOT NULL COMMENT '区域最低一级'
+orders,areaIdPath,varchar(255) DEFAULT NULL COMMENT '区域idpath'
+orders,userName,varchar(20) NOT NULL COMMENT '收件人姓名'
+orders,userAddress,varchar(255) NOT NULL COMMENT '收件人地址'
+orders,userPhone,char(20) DEFAULT NULL COMMENT '收件人电话'
+orders,orderScore,int(11) NOT NULL DEFAULT '0' COMMENT '订单所得积分'
+orders,isInvoice,tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否开发票 1:需要 0:不需要'
+orders,invoiceClient,varchar(255) DEFAULT NULL COMMENT '发票抬头'
+orders,orderRemarks,varchar(255) DEFAULT NULL COMMENT '订单备注'
+orders,orderSrc,tinyint(4) NOT NULL DEFAULT '0' COMMENT '订单来源	0:商城 1:微信 2:手机版 3:安卓App 4:苹果App'
+orders,needPay,"decimal(11,2) DEFAULT '0.00' COMMENT '需缴费用'"
+orders,payRand,int(11) DEFAULT '1' COMMENT '货币单位'
+orders,orderType,int(11) DEFAULT '0' COMMENT '订单类型'
+orders,isRefund,tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否退款	0:否 1：是'
+orders,isAppraise,tinyint(4) DEFAULT '0' COMMENT '是否点评	0:未点评 1:已点评'
+orders,cancelReason,int(11) DEFAULT '0' COMMENT '取消原因ID'
+orders,rejectReason,int(11) DEFAULT '0' COMMENT '用户拒绝原因ID'
+orders,rejectOtherReason,varchar(255) DEFAULT NULL COMMENT '拒收原因'
+orders,isClosed,tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否订单已完结	0：未完结 1:已完结'
+orders,goodsSearchKeys,text
+orders,orderunique,varchar(50) NOT NULL COMMENT '订单流水号'
+orders,receiveTime,varchar(25) DEFAULT NULL COMMENT '收货时间'
+orders,deliveryTime,varchar(25) DEFAULT NULL COMMENT '发货时间'
+orders,tradeNo,varchar(100) DEFAULT NULL COMMENT '在线支付交易流水'
+orders,dataFlag,tinyint(4) NOT NULL DEFAULT '1' COMMENT '订单有效标志	-1：删除 1:有效'
+orders,createTime,varchar(25) NOT NULL COMMENT '下单时间'
+orders,settlementId,int(11) DEFAULT '0' COMMENT '是否结算，大于0的话则是结算ID'
+orders,commissionFee,"decimal(11,2) DEFAULT '0.00' COMMENT '	订单应收佣金'"
+orders,scoreMoney,"decimal(11,2) DEFAULT '0.00' COMMENT '积分抵扣金额'"
+orders,useScore,int(11) DEFAULT '0' COMMENT '花费积分'
+orders,orderCode,varchar(20) DEFAULT 'order'
+orders,extraJson,text COMMENT '额外信息'
+orders,orderCodeTargetId,int(11) DEFAULT '0'
+orders,noticeDeliver,tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '提醒发货 0:未提醒 1:已提醒'
+orders,invoiceJson,text COMMENT '发票信息'
+orders,lockCashMoney,"decimal(11,2) DEFAULT '0.00' COMMENT '锁定提现金额'"
+orders,payTime,varchar(25) DEFAULT NULL COMMENT '支付时间'
+orders,isBatch,tinyint(4) DEFAULT '0' COMMENT '是否拼单'
+orders,totalPayFee,int(11) DEFAULT '0' COMMENT '总支付金额'
+org,orgId,int(11) NOT NULL AUTO_INCREMENT COMMENT '组织ID'
+org,parentId,int(11) NOT NULL COMMENT '父ID'
+org,orgName,varchar(100) NOT NULL COMMENT '组织名称'
+org,orgLevel,tinyint(4) NOT NULL DEFAULT '1' COMMENT '组织级别1;总部及大区级部门;2：总部下属的各个部门及基部门;3:具体工作部门'
+org,managerCode,varchar(15) DEFAULT NULL COMMENT '主管工号'
+org,isdelete,"tinyint(4) NOT NULL DEFAULT '0' COMMENT '删除标志,1:删除;0:有效'"
+org,createTime,varchar(25) DEFAULT NULL COMMENT '创建时间'
+org,updateTime,varchar(25) DEFAULT NULL COMMENT '最后修改时间'
+org,isShow,"tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否显示,0:是 1:否'"
+org,orgType,"tinyint(4) NOT NULL DEFAULT '1' COMMENT '组织类型,0:总裁办;1:研发;2:销售;3:运营;4:产品'"
+payments,id,int(11) NOT NULL AUTO_INCREMENT
+payments,payCode,varchar(20) DEFAULT NULL
+payments,payName,varchar(255) DEFAULT NULL
+payments,payDesc,text
+payments,payOrder,int(11) DEFAULT '0'
+payments,payConfig,text
+payments,enabled,tinyint(4) DEFAULT '0'
+payments,isOnline,tinyint(4) DEFAULT '0'
+payments,payFor,varchar(100) DEFAULT NULL
+privileges,privilegeId,int(11) NOT NULL AUTO_INCREMENT
+privileges,menuId,int(11) NOT NULL
+privileges,privilegeCode,varchar(20) NOT NULL
+privileges,privilegeName,varchar(30) NOT NULL
+privileges,isMenuPrivilege,tinyint(4) NOT NULL DEFAULT '0'
+privileges,privilegeUrl,varchar(255) DEFAULT NULL
+privileges,otherPrivilegeUrl,text
+privileges,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+privileges,isEnable,tinyint(4) DEFAULT '1'
+recommends,id,int(11) NOT NULL AUTO_INCREMENT
+recommends,goodsCatId,int(11) NOT NULL DEFAULT '0'
+recommends,dataType,tinyint(4) NOT NULL DEFAULT '0'
+recommends,dataSrc,tinyint(4) DEFAULT '0'
+recommends,dataId,int(11) NOT NULL DEFAULT '0'
+recommends,dataSort,int(11) NOT NULL DEFAULT '0'
+roles,roleId,int(11) NOT NULL AUTO_INCREMENT
+roles,roleName,varchar(30) NOT NULL
+roles,roleDesc,varchar(255) DEFAULT NULL
+roles,privileges,text
+roles,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+roles,createTime,datetime NOT NULL
+settlements,settlementId,int(11) NOT NULL AUTO_INCREMENT
+settlements,settlementNo,varchar(20) NOT NULL
+settlements,settlementType,tinyint(4) NOT NULL DEFAULT '0'
+settlements,shopId,int(11) NOT NULL
+settlements,settlementMoney,"decimal(11,2) NOT NULL DEFAULT '0.00'"
+settlements,commissionFee,"decimal(11,2) NOT NULL DEFAULT '0.00'"
+settlements,backMoney,"decimal(11,2) NOT NULL DEFAULT '0.00'"
+settlements,settlementStatus,tinyint(4) NOT NULL DEFAULT '0'
+settlements,settlementTime,datetime DEFAULT NULL
+settlements,remarks,varchar(255) DEFAULT NULL
+settlements,createTime,datetime NOT NULL
+shop_accreds,id,int(11) NOT NULL AUTO_INCREMENT
+shop_accreds,accredId,int(11) NOT NULL DEFAULT '0'
+shop_accreds,shopId,int(11) NOT NULL DEFAULT '0'
+shop_cats,catId,int(11) NOT NULL AUTO_INCREMENT
+shop_cats,shopId,int(11) NOT NULL
+shop_cats,parentId,int(11) NOT NULL
+shop_cats,isShow,tinyint(4) NOT NULL DEFAULT '1'
+shop_cats,catName,varchar(100) NOT NULL
+shop_cats,catSort,int(11) NOT NULL DEFAULT '0'
+shop_cats,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+shop_cats,createTime,datetime NOT NULL
+shop_configs,configId,int(11) NOT NULL AUTO_INCREMENT
+shop_configs,shopId,int(11) NOT NULL
+shop_configs,shopTitle,varchar(255) DEFAULT NULL
+shop_configs,shopKeywords,varchar(255) DEFAULT NULL
+shop_configs,shopDesc,varchar(255) DEFAULT NULL
+shop_configs,shopBanner,varchar(150) DEFAULT NULL
+shop_configs,shopAds,text
+shop_configs,shopAdsUrl,text
+shop_configs,shopServicer,varchar(100) DEFAULT NULL
+shop_configs,shopHotWords,varchar(255) DEFAULT NULL
+shop_configs,shopStreetImg,varchar(150) DEFAULT '' COMMENT '店铺街背景'
+shop_configs,shopMoveBanner,varchar(150) DEFAULT NULL
+shop_configs,shopHomeTheme,varchar(200) NOT NULL DEFAULT 'shop_home' COMMENT '店铺风格'
+shop_configs,mobileShopHomeTheme,varchar(200) NOT NULL DEFAULT 'shop_home' COMMENT '手机端店铺风格'
+shop_configs,wechatShopHomeTheme,varchar(200) NOT NULL DEFAULT 'shop_home' COMMENT '微信端店铺风格'
+shop_extras,id,int(11) NOT NULL AUTO_INCREMENT
+shop_extras,shopId,int(11) NOT NULL
+shop_extras,businessLicenceType,tinyint(4) DEFAULT '0'
+shop_extras,businessLicence,varchar(100) DEFAULT NULL
+shop_extras,licenseAddress,varchar(500) DEFAULT NULL
+shop_extras,businessAreaPath,varchar(100) DEFAULT NULL
+shop_extras,legalPersonName,varchar(100) DEFAULT NULL
+shop_extras,establishmentDate,date DEFAULT NULL
+shop_extras,businessStartDate,date DEFAULT NULL
+shop_extras,businessEndDate,date DEFAULT NULL
+shop_extras,isLongbusinessDate,tinyint(4) DEFAULT '0'
+shop_extras,registeredCapital,"decimal(11,0) DEFAULT '0'"
+shop_extras,empiricalRange,varchar(1000) DEFAULT NULL
+shop_extras,legalCertificateType,tinyint(4) DEFAULT '0'
+shop_extras,legalCertificate,varchar(50) DEFAULT NULL
+shop_extras,legalCertificateStartDate,date DEFAULT NULL
+shop_extras,legalCertificateEndDate,date DEFAULT NULL
+shop_extras,isLonglegalCertificateDate,tinyint(4) DEFAULT '0'
+shop_extras,legalCertificateImg,varchar(150) DEFAULT NULL
+shop_extras,businessLicenceImg,varchar(150) DEFAULT NULL
+shop_extras,bankAccountPermitImg,varchar(150) DEFAULT NULL
+shop_extras,organizationCode,varchar(100) DEFAULT NULL
+shop_extras,organizationCodeStartDate,date DEFAULT NULL
+shop_extras,organizationCodeEndDate,date DEFAULT NULL
+shop_extras,isLongOrganizationCodeDate,tinyint(4) DEFAULT '0'
+shop_extras,organizationCodeImg,varchar(150) DEFAULT NULL
+shop_extras,taxRegistrationCertificateImg,varchar(450) DEFAULT NULL
+shop_extras,taxpayerQualificationImg,varchar(150) DEFAULT NULL
+shop_extras,taxpayerType,tinyint(4) DEFAULT '0'
+shop_extras,taxpayerNo,varchar(100) DEFAULT NULL
+shop_extras,applyLinkMan,varchar(50) DEFAULT NULL
+shop_extras,applyLinkTel,varchar(50) DEFAULT NULL
+shop_extras,applyLinkEmail,varchar(50) DEFAULT NULL
+shop_extras,isInvestment,tinyint(4) NOT NULL DEFAULT '0'
+shop_extras,investmentStaff,varchar(50) DEFAULT NULL
+shop_freights,freightId,int(11) NOT NULL AUTO_INCREMENT
+shop_freights,shopId,int(11) NOT NULL
+shop_freights,areaId2,int(11) NOT NULL
+shop_freights,freight,int(11) NOT NULL DEFAULT '0'
+shop_freights,createTime,datetime NOT NULL
+shop_message_cats,id,int(11) NOT NULL AUTO_INCREMENT
+shop_message_cats,msgDataId,int(11) DEFAULT '0'
+shop_message_cats,msgType,tinyint(4) DEFAULT '0'
+shop_message_cats,msgCode,varchar(100) DEFAULT ''
+shop_roles,id,int(11) NOT NULL AUTO_INCREMENT
+shop_roles,shopId,int(11) DEFAULT '0'
+shop_roles,roleName,varchar(100) DEFAULT NULL
+shop_roles,privilegeMsgs,text
+shop_roles,privilegeUrls,text
+shop_roles,createTime,datetime DEFAULT NULL
+shop_roles,dataFlag,tinyint(4) DEFAULT '1'
+shop_scores,scoreId,int(11) NOT NULL AUTO_INCREMENT
+shop_scores,shopId,int(11) NOT NULL
+shop_scores,totalScore,int(11) NOT NULL DEFAULT '0'
+shop_scores,totalUsers,int(11) NOT NULL DEFAULT '0'
+shop_scores,goodsScore,int(11) NOT NULL DEFAULT '0'
+shop_scores,goodsUsers,int(11) NOT NULL DEFAULT '0'
+shop_scores,serviceScore,int(11) NOT NULL DEFAULT '0'
+shop_scores,serviceUsers,int(11) NOT NULL DEFAULT '0'
+shop_scores,timeScore,int(11) NOT NULL DEFAULT '0'
+shop_scores,timeUsers,int(11) NOT NULL DEFAULT '0'
+shop_styles,id,int(11) NOT NULL AUTO_INCREMENT
+shop_styles,styleSys,varchar(255) DEFAULT NULL
+shop_styles,styleName,varchar(255) DEFAULT NULL
+shop_styles,styleCat,tinyint(4) unsigned DEFAULT '0'
+shop_styles,stylePath,varchar(255) DEFAULT NULL
+shop_styles,screenshot,varchar(255) DEFAULT NULL
+shop_styles,isShow,tinyint(4) DEFAULT '1' COMMENT '1:显示  0:隐藏'
+shop_users,id,int(11) NOT NULL AUTO_INCREMENT
+shop_users,shopId,int(11) NOT NULL DEFAULT '0'
+shop_users,userId,int(11) NOT NULL DEFAULT '0'
+shop_users,roleId,int(11) NOT NULL DEFAULT '0'
+shop_users,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+shops,shopId,int(11) NOT NULL AUTO_INCREMENT COMMENT '商铺ID，自增'
+shops,shopSn,varchar(20) DEFAULT ''
+shops,userId,int(11) NOT NULL COMMENT '商铺联系人ID'
+shops,areaIdPath,varchar(255) DEFAULT ''
+shops,areaId,int(11) DEFAULT '0'
+shops,isSelf,tinyint(4) NOT NULL DEFAULT '0'
+shops,shopName,varchar(100) DEFAULT '' COMMENT '商铺名称'
+shops,shopkeeper,varchar(50) DEFAULT ''
+shops,telephone,varchar(20) DEFAULT '' COMMENT '联系人电话'
+shops,shopCompany,varchar(255) DEFAULT '' COMMENT '商家实体名称'
+shops,shopImg,varchar(150) DEFAULT '' COMMENT 'logo图片'
+shops,shopTel,varchar(40) DEFAULT '' COMMENT '商家联系电话'
+shops,shopQQ,varchar(50) DEFAULT NULL COMMENT '联系人QQ'
+shops,shopWangWang,varchar(50) DEFAULT NULL
+shops,shopAddress,varchar(255) DEFAULT '' COMMENT '商家地址'
+shops,bankId,int(11) DEFAULT '0'
+shops,bankNo,varchar(20) DEFAULT ''
+shops,bankUserName,varchar(50) DEFAULT ''
+shops,isInvoice,tinyint(4) NOT NULL DEFAULT '0'
+shops,invoiceRemarks,varchar(255) DEFAULT NULL
+shops,serviceStartTime,bigint(20) NOT NULL DEFAULT '1570419271000' COMMENT '服务开始时间'
+shops,serviceEndTime,bigint(20) NOT NULL DEFAULT '1570419271000' COMMENT '服务结束时间'
+shops,freight,int(11) DEFAULT '0'
+shops,shopAtive,tinyint(4) NOT NULL DEFAULT '1'
+shops,shopStatus,tinyint(4) NOT NULL DEFAULT '1' COMMENT '商铺状态'
+shops,statusDesc,varchar(255) DEFAULT NULL
+shops,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+shops,createTime,date DEFAULT NULL
+shops,shopMoney,"decimal(11,2) DEFAULT '0.00'"
+shops,lockMoney,"decimal(11,2) DEFAULT '0.00'"
+shops,noSettledOrderNum,int(11) DEFAULT '0'
+shops,noSettledOrderFee,"decimal(11,2) DEFAULT '0.00'"
+shops,paymentMoney,"decimal(11,2) DEFAULT '0.00'"
+shops,bankAreaId,int(11) DEFAULT '0'
+shops,bankAreaIdPath,varchar(100) DEFAULT NULL
+shops,applyStatus,tinyint(4) DEFAULT '0'
+shops,applyDesc,varchar(255) DEFAULT NULL
+shops,applyTime,datetime DEFAULT NULL
+shops,applyStep,tinyint(4) DEFAULT '1'
+shops,shopNotice,varchar(300) DEFAULT NULL COMMENT '店铺公告'
+shops,rechargeMoney,"decimal(11,2) DEFAULT '0.00' COMMENT '充值金额'"
+shops,longitude,"decimal(10,7) DEFAULT NULL"
+shops,latitude,"decimal(10,7) DEFAULT NULL"
+shops,mapLevel,int(11) DEFAULT '16'
+shops,BDcode,varchar(16) DEFAULT NULL COMMENT '公司管理人员code'
+spec_cats,catId,int(11) NOT NULL AUTO_INCREMENT
+spec_cats,goodsCatId,int(11) NOT NULL DEFAULT '0'
+spec_cats,goodsCatPath,varchar(100) NOT NULL
+spec_cats,catName,varchar(255) NOT NULL
+spec_cats,isAllowImg,tinyint(4) NOT NULL DEFAULT '0'
+spec_cats,isShow,tinyint(4) NOT NULL DEFAULT '1'
+spec_cats,catSort,int(11) DEFAULT '0'
+spec_cats,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+spec_cats,createTime,datetime NOT NULL
+spec_items,itemId,int(11) NOT NULL AUTO_INCREMENT
+spec_items,shopId,int(11) NOT NULL DEFAULT '0'
+spec_items,catId,int(11) NOT NULL DEFAULT '0'
+spec_items,goodsId,int(11) NOT NULL DEFAULT '0'
+spec_items,itemName,varchar(100) NOT NULL
+spec_items,itemDesc,varchar(255) DEFAULT NULL
+spec_items,itemImg,varchar(150) NOT NULL
+spec_items,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+spec_items,createTime,datetime NOT NULL
+staffs,staffId,int(11) NOT NULL AUTO_INCREMENT
+staffs,loginName,varchar(40) NOT NULL
+staffs,loginPwd,varchar(50) NOT NULL
+staffs,secretKey,int(32) NOT NULL
+staffs,staffName,varchar(50) NOT NULL
+staffs,staffNo,varchar(20) DEFAULT NULL
+staffs,staffPhoto,varchar(150) DEFAULT NULL
+staffs,staffRoleId,int(11) NOT NULL
+staffs,workStatus,tinyint(4) NOT NULL DEFAULT '1'
+staffs,staffStatus,tinyint(4) NOT NULL DEFAULT '0'
+staffs,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+staffs,createTime,datetime NOT NULL
+staffs,lastTime,datetime DEFAULT NULL
+staffs,lastIP,char(16) DEFAULT NULL
+staffs,wxOpenId,varchar(100) DEFAULT NULL
+staffs,staffPhone,char(11) DEFAULT NULL
+styles,id,int(11) NOT NULL AUTO_INCREMENT
+styles,styleSys,varchar(20) DEFAULT NULL
+styles,styleName,varchar(255) NOT NULL
+styles,styleAuthor,varchar(255) DEFAULT NULL
+styles,styleShopSite,varchar(11) DEFAULT NULL
+styles,styleShopId,int(11) DEFAULT '0'
+styles,stylePath,varchar(255) NOT NULL
+styles,isUse,tinyint(4) NOT NULL DEFAULT '0'
+switchs,id,int(11) NOT NULL AUTO_INCREMENT
+switchs,homeURL,varchar(255) DEFAULT NULL
+switchs,mobileURL,varchar(255) DEFAULT NULL
+switchs,wechatURL,varchar(255) DEFAULT NULL
+switchs,urlMark,varchar(255) DEFAULT NULL
+sys_configs,configId,int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID'
+sys_configs,fieldName,varchar(50) DEFAULT NULL COMMENT '字段名称'
+sys_configs,fieldCode,varchar(50) DEFAULT NULL
+sys_configs,fieldValue,text
+sys_configs,fieldType,tinyint(4) DEFAULT '0'
+template_msgs,id,int(11) NOT NULL AUTO_INCREMENT
+template_msgs,tplType,tinyint(4) NOT NULL DEFAULT '0'
+template_msgs,tplCode,varchar(50) NOT NULL
+template_msgs,tplExternaId,varchar(255) DEFAULT NULL
+template_msgs,tplContent,varchar(255) NOT NULL
+template_msgs,isEnbale,tinyint(4) DEFAULT '1'
+template_msgs,tplDesc,text
+template_msgs,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+template_msgs,status,tinyint(4) DEFAULT '1'
+third_users,id,int(11) NOT NULL AUTO_INCREMENT
+third_users,userId,int(11) DEFAULT NULL
+third_users,thirdCode,varchar(20) DEFAULT NULL
+third_users,thirdOpenId,varchar(100) DEFAULT NULL
+third_users,createTime,datetime DEFAULT NULL
+user_address,addressId,int(11) NOT NULL AUTO_INCREMENT
+user_address,userId,int(11) NOT NULL
+user_address,userName,varchar(50) NOT NULL
+user_address,userPhone,varchar(20) DEFAULT NULL
+user_address,areaIdPath,varchar(255) NOT NULL DEFAULT '0'
+user_address,areaId,int(11) NOT NULL DEFAULT '0'
+user_address,userAddress,varchar(255) NOT NULL
+user_address,isDefault,tinyint(4) NOT NULL DEFAULT '0'
+user_address,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+user_address,createTime,datetime NOT NULL
+user_ranks,rankId,int(11) NOT NULL AUTO_INCREMENT
+user_ranks,rankName,varchar(20) NOT NULL
+user_ranks,startScore,int(11) NOT NULL DEFAULT '0'
+user_ranks,endScore,int(11) NOT NULL DEFAULT '0'
+user_ranks,userrankImg,varchar(150) DEFAULT NULL
+user_ranks,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+user_ranks,createTime,datetime NOT NULL
+user_scores,scoreId,int(11) NOT NULL AUTO_INCREMENT
+user_scores,userId,int(11) NOT NULL DEFAULT '0'
+user_scores,score,int(11) NOT NULL DEFAULT '0'
+user_scores,dataSrc,int(11) NOT NULL DEFAULT '0'
+user_scores,dataId,int(11) NOT NULL DEFAULT '0'
+user_scores,dataRemarks,text
+user_scores,scoreType,int(11) NOT NULL DEFAULT '0'
+user_scores,createTime,datetime NOT NULL
+users,userId,int(11) NOT NULL AUTO_INCREMENT
+users,loginName,varchar(20) NOT NULL
+users,loginSecret,int(11) NOT NULL
+users,loginPwd,varchar(50) NOT NULL
+users,userType,tinyint(4) NOT NULL DEFAULT '0'
+users,userSex,tinyint(4) DEFAULT '0'
+users,userName,varchar(100) DEFAULT NULL
+users,trueName,varchar(100) DEFAULT NULL
+users,brithday,date DEFAULT NULL
+users,userPhoto,varchar(200) DEFAULT NULL
+users,userQQ,varchar(20) DEFAULT NULL
+users,userPhone,char(11) DEFAULT ''
+users,userEmail,varchar(50) DEFAULT ''
+users,userScore,int(11) DEFAULT '0'
+users,userTotalScore,int(11) DEFAULT '0'
+users,lastIP,varchar(16) DEFAULT NULL
+users,lastTime,datetime DEFAULT NULL
+users,userFrom,tinyint(4) DEFAULT '0'
+users,userMoney,"decimal(11,2) DEFAULT '0.00'"
+users,lockMoney,"decimal(11,2) DEFAULT '0.00'"
+users,userStatus,tinyint(4) NOT NULL DEFAULT '1'
+users,dataFlag,tinyint(4) NOT NULL DEFAULT '1'
+users,createTime,datetime NOT NULL
+users,payPwd,varchar(100) DEFAULT NULL
+users,rechargeMoney,"decimal(11,2) DEFAULT '0.00' COMMENT '充值金额'"
+users,isInform,tinyint(4) NOT NULL DEFAULT '1'

@@ -1,0 +1,29 @@
+# Build and local runtime
+**/target/
+**/node_modules/
+**/dist/
+**/__pycache__/
+**/.pytest_cache/
+**/.venv/
+**/.idea/
+**/.DS_Store
+*.iml
+*.class
+*.jar
+*.log
+*.pyc
+*.bak*
+.env
+.env.*
+!.env.example
+!**/.env.example
+simulator_inserted.jsonl
+# Raw dumps and runtime snapshots are distributed separately after review
+原始数据/
+*.dump
+*.rdb
+*.aof
+**/checkpoints/
+**/savepoints/
+**/deep-storage/
+_tmp_*

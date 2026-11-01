@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+backend/.venv/
+frontend/node_modules/
+frontend/dist/
+
+# 运行日志
+*.log
+
+# 截图（含 v3/chrome-profile 浏览器隐私数据，严禁上传）
+screenshots/
+
+# 模拟器生成的数据输出
+tools/simulator_inserted.jsonl

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>realtime-flink-kafka-dws</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <packaging>jar</packaging>
+
+  <properties>
+
+    <!-- Java版本 -->
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Flink版本 -->
+    <flink.version>1.14.6</flink.version>
+
+    <!-- Scala版本 -->
+    <scala.binary.version>2.11</scala.binary.version>
+
+    <!-- 第三方依赖版本 -->
+    <fastjson.version>1.2.83</fastjson.version>
+    <slf4j.version>1.7.32</slf4j.version>
+    <junit.version>4.13.2</junit.version>
+
+  </properties>
+
+  <dependencies>
+
+    <!-- ========================================================= -->
+    <!-- Flink Java API -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-java</artifactId>
+      <version>${flink.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- Flink DataStream API -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
+      <version>${flink.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- Flink Clients -->
+    <!-- IDEA本地直接运行App.java需要 -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-clients_${scala.binary.version}</artifactId>
+      <version>${flink.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- Flink Runtime -->
+    <!-- 本地运行及后续Checkpoint需要 -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-runtime</artifactId>
+      <version>${flink.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- Flink Kafka Connector -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
+      <version>${flink.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- Fastjson -->
+    <!-- 用于解析dwd_order_info中的JSON -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- SLF4J API -->
+    <!-- 与DWD保持一致 -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- 本地简单日志实现 -->
+    <!-- 与DWD保持一致 -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- JUnit -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- Flink测试工具 -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-test-utils_${scala.binary.version}</artifactId>
+      <version>${flink.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+
+    <!-- ========================================================= -->
+    <!-- Flink Streaming测试Jar -->
+    <!-- 用于ProcessFunction / Keyed State测试 -->
+    <!-- ========================================================= -->
+
+    <dependency>
+      <groupId>org.apache.flink</groupId>
+      <artifactId>flink-streaming-java_${scala.binary.version}</artifactId>
+      <version>${flink.version}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+
+  <build>
+
+    <finalName>realtime-flink-kafka-dws-fat</finalName>
+
+    <plugins>
+
+      <!-- ===================================================== -->
+      <!-- Java编译插件 -->
+      <!-- ===================================================== -->
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <artifactSet>
+                <excludes>
+                  <exclude>org.apache.flink:flink-java</exclude>
+                  <exclude>org.apache.flink:flink-core</exclude>
+                  <exclude>org.apache.flink:flink-annotations</exclude>
+                  <exclude>org.apache.flink:flink-metrics-core</exclude>
+                  <exclude>org.apache.flink:flink-streaming-java_*</exclude>
+                  <exclude>org.apache.flink:flink-file-sink-common</exclude>
+                  <exclude>org.apache.flink:flink-scala_*</exclude>
+                  <exclude>org.apache.flink:flink-clients_*</exclude>
+                  <exclude>org.apache.flink:flink-optimizer</exclude>
+                  <exclude>org.apache.flink:flink-runtime</exclude>
+                  <exclude>org.apache.flink:flink-rpc-*</exclude>
+                  <exclude>org.apache.flink:flink-queryable-state-client-java</exclude>
+                  <exclude>org.apache.flink:flink-hadoop-fs</exclude>
+                  <exclude>org.apache.flink:flink-shaded-*</exclude>
+                </excludes>
+              </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>org.example.App</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>
